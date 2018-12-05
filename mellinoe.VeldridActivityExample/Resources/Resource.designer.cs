@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("mellinoe.VeldridActivityExample.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("VeldridActivityExample.Resource", IsApplication=true)]
 
-namespace mellinoe.VeldridActivityExample
+namespace VeldridActivityExample
 {
 	
 	

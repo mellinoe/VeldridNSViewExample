@@ -11,7 +11,7 @@ namespace mellinoe.VeldridActivityExample
     {
         public static GraphicsDevice Device { get; private set; }
 
-        public static void InitDevice()
+        public static void InitDevice(SwapchainDescription swapchainDescription)
         {
             GraphicsDeviceOptions options = new GraphicsDeviceOptions(
                 debug: false,
@@ -21,7 +21,8 @@ namespace mellinoe.VeldridActivityExample
                 preferDepthRangeZeroToOne: true,
                 preferStandardClipSpaceYDirection: true);
 
-            Device = GraphicsDevice.CreateVulkan(options);
+            //Device = GraphicsDevice.CreateVulkan(options);
+            Device = GraphicsDevice.CreateOpenGLES(options, swapchainDescription);
         }
 
         internal static void DisposeDevice()

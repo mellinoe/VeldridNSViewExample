@@ -53,17 +53,8 @@
     <Reference Include="Xamarin.Mac" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Veldrid.OpenGLBindings">
-      <HintPath>..\packages\Veldrid.OpenGLBindings.4.5.0-beta1-0111-g69f1bc0f54\lib\netstandard2.0\Veldrid.OpenGLBindings.dll</HintPath>
-    </Reference>
     <Reference Include="vk">
       <HintPath>..\packages\Vk.1.0.21\lib\netstandard1.4\vk.dll</HintPath>
-    </Reference>
-    <Reference Include="Veldrid.MetalBindings">
-      <HintPath>..\packages\Veldrid.MetalBindings.4.5.0-beta1-0111-g69f1bc0f54\lib\netstandard2.0\Veldrid.MetalBindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Veldrid">
-      <HintPath>..\packages\Veldrid.4.5.0-beta1-0111-g69f1bc0f54\lib\netstandard2.0\Veldrid.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
@@ -94,6 +85,15 @@
     </Reference>
     <Reference Include="NativeLibraryLoader">
       <HintPath>..\packages\NativeLibraryLoader.1.0.12\lib\netstandard2.0\NativeLibraryLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="Veldrid.MetalBindings">
+      <HintPath>..\packages\Veldrid.MetalBindings.4.5.0-beta1-0113-g7f18acfea8\lib\netstandard2.0\Veldrid.MetalBindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Veldrid.OpenGLBindings">
+      <HintPath>..\packages\Veldrid.OpenGLBindings.4.5.0-beta1-0113-g7f18acfea8\lib\netstandard2.0\Veldrid.OpenGLBindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Veldrid">
+      <HintPath>..\packages\Veldrid.4.5.0-beta1-0113-g7f18acfea8\lib\netstandard2.0\Veldrid.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
