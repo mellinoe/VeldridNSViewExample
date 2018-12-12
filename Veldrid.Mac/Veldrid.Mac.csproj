@@ -87,13 +87,13 @@
       <HintPath>..\packages\NativeLibraryLoader.1.0.12\lib\netstandard2.0\NativeLibraryLoader.dll</HintPath>
     </Reference>
     <Reference Include="Veldrid.MetalBindings">
-      <HintPath>..\packages\Veldrid.MetalBindings.4.5.0-beta1-0113-g7f18acfea8\lib\netstandard2.0\Veldrid.MetalBindings.dll</HintPath>
+      <HintPath>..\packages\Veldrid.MetalBindings.4.5.0-beta1-0115-gc6e10f9598\lib\netstandard2.0\Veldrid.MetalBindings.dll</HintPath>
     </Reference>
     <Reference Include="Veldrid.OpenGLBindings">
-      <HintPath>..\packages\Veldrid.OpenGLBindings.4.5.0-beta1-0113-g7f18acfea8\lib\netstandard2.0\Veldrid.OpenGLBindings.dll</HintPath>
+      <HintPath>..\packages\Veldrid.OpenGLBindings.4.5.0-beta1-0115-gc6e10f9598\lib\netstandard2.0\Veldrid.OpenGLBindings.dll</HintPath>
     </Reference>
     <Reference Include="Veldrid">
-      <HintPath>..\packages\Veldrid.4.5.0-beta1-0113-g7f18acfea8\lib\netstandard2.0\Veldrid.dll</HintPath>
+      <HintPath>..\packages\Veldrid.4.5.0-beta1-0115-gc6e10f9598\lib\netstandard2.0\Veldrid.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -122,10 +122,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AppGlobals.cs" />
+    <Compile Include="VeldridView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
