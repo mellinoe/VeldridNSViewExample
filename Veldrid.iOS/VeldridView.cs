@@ -29,7 +29,7 @@ namespace VeldridUIViewExample
 
         public VeldridView(GraphicsBackend backend, GraphicsDeviceOptions deviceOptions)
         {
-            if (!(backend == GraphicsBackend.Metal || backend == GraphicsBackend.OpenGL))
+            if (!(backend == GraphicsBackend.Metal || backend == GraphicsBackend.OpenGLES))
             {
                 throw new NotSupportedException($"{backend} is not supported on windows.");
             }
