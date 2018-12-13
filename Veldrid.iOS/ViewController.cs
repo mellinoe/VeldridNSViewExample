@@ -7,11 +7,12 @@ using CoreAnimation;
 
 namespace VeldridUIViewExample
 {
-    public partial class ViewController : UIViewController
+    [Register("ViewController")]
+    public class ViewController : UIViewController
     {
-        private readonly GraphicsDevice _gd;
-        private Swapchain _sc;
-        private CommandList _cl;
+        private VeldridView _veldridView;
+        private CommandList _commandList;
+
         private int _frameIndex = 0;
         private RgbaFloat[] _clearColors =
         {
@@ -23,63 +24,52 @@ namespace VeldridUIViewExample
             new RgbaFloat(0.8f, 0.1f, 0.3f, 1f),
             new RgbaFloat(0.8f, 0.1f, 0.9f, 1f),
         };
-        private bool _resized;
-        private (uint Width, uint Height) _size;
         private readonly int _frameRepeatCount = 20;
 
         public ViewController(IntPtr handle) : base(handle)
         {
-            _frameIndex = new Random().Next(0, _clearColors.Length * _frameRepeatCount);
-            _gd = AppGlobals.Device;
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            var ss = SwapchainSource.CreateUIView(View.Handle);
-            SwapchainDescription scDesc = new SwapchainDescription(
-                ss, (uint)View.Frame.Width, (uint)View.Frame.Height, null, true, true);
-            _sc = AppGlobals.Device.ResourceFactory.CreateSwapchain(scDesc);
-            _cl = AppGlobals.Device.ResourceFactory.CreateCommandList();
+            var graphicsDeviceOptions = new GraphicsDeviceOptions(false, null, false, ResourceBindingModel.Improved, true, true);
 
-            // To render at a steady rate, we create a display link which will invoke our Render function.
-            CADisplayLink displayLink = CADisplayLink.Create(HandleDisplayLinkOutputCallback);
-            displayLink.AddToRunLoop(NSRunLoop.Current, NSRunLoopMode.Default);
-        }
-
-        private void Render()
-        {
-            // If we've detected a resize event, we handle it now.
-            if (_resized)
+            _veldridView = new VeldridView(GraphicsBackend.Metal, graphicsDeviceOptions)
             {
-                _resized = false;
-                _sc.Resize(_size.Width, _size.Height);
-            }
+                TranslatesAutoresizingMaskIntoConstraints = false
+            };
+            View.AddSubview(_veldridView);
+            _veldridView.LeftAnchor.ConstraintEqualTo(View.LeftAnchor, 16).Active = true;
+            _veldridView.RightAnchor.ConstraintEqualTo(View.RightAnchor, -16).Active = true;
+            _veldridView.TopAnchor.ConstraintEqualTo(View.TopAnchor, 16).Active = true;
+            _veldridView.BottomAnchor.ConstraintEqualTo(View.BottomAnchor, -16).Active = true;
 
-            // Each frame, we clear the Swapchain's color target.
-            // Several different colors are cycled.
-            _cl.Begin();
-            _cl.SetFramebuffer(_sc.Framebuffer);
-            _cl.ClearColorTarget(0, _clearColors[(_frameIndex / _frameRepeatCount)]);
-            _cl.End();
-            _gd.SubmitCommands(_cl);
-            _gd.SwapBuffers(_sc);
+            _veldridView.DeviceReady += VeldridView_DeviceReady;
+            _veldridView.Resized += VeldridView_Resized;
+            _veldridView.Rendering += VeldridView_Rendering;
+        }
 
-            // Do some math to loop our color picker index.
+        void VeldridView_DeviceReady()
+        {
+            _commandList = _veldridView.GraphicsDevice.ResourceFactory.CreateCommandList();
+        }
+
+        void VeldridView_Resized()
+        {
+        }
+
+        void VeldridView_Rendering()
+        {
+            _commandList.Begin();
+            _commandList.SetFramebuffer(_veldridView.MainSwapchain.Framebuffer);
+            _commandList.ClearColorTarget(0, _clearColors[_frameIndex / _frameRepeatCount]);
+            _commandList.End();
+            _veldridView.GraphicsDevice.SubmitCommands(_commandList);
+            _veldridView.GraphicsDevice.SwapBuffers(_veldridView.MainSwapchain);
+
             _frameIndex = (_frameIndex + 1) % (_clearColors.Length * _frameRepeatCount);
-        }
-
-        private void HandleDisplayLinkOutputCallback()
-        {
-            Render();
-        }
-
-        public override void ViewDidLayoutSubviews()
-        {
-            base.ViewDidLayoutSubviews();
-            _resized = true;
-            _size = ((uint)View.Frame.Width, (uint)View.Frame.Height);
         }
     }
 }

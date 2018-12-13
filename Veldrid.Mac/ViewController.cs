@@ -69,6 +69,5 @@ namespace VeldridNSViewExample
 
             _frameIndex = (_frameIndex + 1) % (_clearColors.Length * _frameRepeatCount);
         }
-
     }
 }
