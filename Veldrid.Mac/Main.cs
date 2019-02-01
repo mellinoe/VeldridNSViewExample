@@ -7,9 +7,7 @@ namespace VeldridNSViewExample
         static void Main(string[] args)
         {
             NSApplication.Init();
-            AppGlobals.InitDevice();
             NSApplication.Main(args);
-            AppGlobals.DisposeDevice();
         }
     }
 }

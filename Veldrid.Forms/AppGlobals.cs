@@ -1,6 +1,7 @@
-﻿using Veldrid;
+﻿using System;
+using Veldrid;
 
-namespace VeldridNSViewExample
+namespace Veldrid.Forms
 {
     // Using Veldrid, only a single GraphicsDevice needs to be created,
     // even when rendering to many Swapchains in an application.
@@ -11,7 +12,7 @@ namespace VeldridNSViewExample
     {
         public static GraphicsDevice Device { get; private set; }
 
-        public static void InitDevice()
+        public static void InitDevice(SwapchainDescription swapchainDescription)
         {
             GraphicsDeviceOptions options = new GraphicsDeviceOptions(
                 debug: false,
@@ -21,7 +22,7 @@ namespace VeldridNSViewExample
                 preferDepthRangeZeroToOne: true,
                 preferStandardClipSpaceYDirection: true);
 
-            Device = GraphicsDevice.CreateMetal(options);
+            Device = GraphicsDevice.CreateOpenGLES(options, swapchainDescription);
         }
 
         internal static void DisposeDevice()
